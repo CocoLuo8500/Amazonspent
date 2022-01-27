@@ -1,0 +1,36 @@
+import pandas as pd
+df = pd.read_csv('C:/Python/Amazon Report.csv')
+df.sample(10)
+
+# how many rows and columns
+df.shape
+
+#NULL -> 0
+df = df.fillna(0)
+df.head()
+
+df["Total Charged"] = df["Total Charged"].str.replace('$','').astype(float)
+df.head()
+
+# Total Money Spent
+df["Total Charged"].sum()
+
+# Avg Money spent
+df["Total Charged"].mean()
+
+df["Total Charged"].max()
+
+df["Tax Charged"] = df["Tax Charged"].str.replace('$','').astype(float)
+df.head()
+
+# Total Tax Spent
+df["Tax Charged"].sum()
+
+# Avg tax rate
+df["Tax Charged"].sum() / df["Total Charged"].sum()
+
+# Convert date frame
+df['Order Date'] = pd.to_datetime(df['Order Date'])
+df.head()
+
+df.plot.bar(x='Order Date', y='Total Charged', rot=90, figsize=(20,10))
